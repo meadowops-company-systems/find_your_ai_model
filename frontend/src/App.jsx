@@ -228,7 +228,10 @@ function App() {
     () => filterAlternatives(normalized.alternatives, { query: alternativeQuery, minScore: minimumScore, priceMode }),
     [normalized.alternatives, alternativeQuery, minimumScore, priceMode],
   );
-  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+  const apiUrl = import.meta.env.VITE_API_URL || 
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000/api'
+      : '/api');
   const auditUrl = 'https://meadowops.tech/audit';
   const canSubmit = task.trim().length >= 10 && !loading;
 
