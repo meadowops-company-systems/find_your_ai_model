@@ -206,7 +206,7 @@ Deploy new features: Push to `main` branch → Auto-deployed in 2-5 minutes
 
 **Bug reports:** GitHub Issues  
 **Feature requests:** GitHub Discussions  
-**Email:** support@findyouraimodel.com  
+**Email:** support@meadowops.tech  
 
 ---
 
