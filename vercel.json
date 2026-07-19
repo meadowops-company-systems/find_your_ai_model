@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "api/*.py",
+      "src": "api/recommend.py",
       "use": "@vercel/python"
     }
   ],
