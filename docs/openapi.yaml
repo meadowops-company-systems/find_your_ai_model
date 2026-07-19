@@ -1,0 +1,147 @@
+openapi: 3.1.0
+info:
+  title: Find Your AI Model API
+  version: 1.0.0
+  description: Public API for AI model recommendations and anonymous persistence.
+servers:
+  - url: https://findyouraimodel.com/api
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: Service health
+  /models:
+    get:
+      summary: List AI models
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: Model list
+  /recommend:
+    post:
+      summary: Get a recommendation for a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [taskDescription]
+              properties:
+                taskDescription:
+                  type: string
+                  minLength: 10
+                  maxLength: 5000
+                category:
+                  type: string
+      responses:
+        '200':
+          description: Recommendation payload
+  /dashboard:
+    get:
+      summary: Anonymous dashboard summary
+      responses:
+        '200':
+          description: Dashboard metrics
+  /history:
+    get:
+      summary: List recommendation history
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 12
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: query
+          schema:
+            type: string
+    post:
+      summary: Save or clear history
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                action:
+                  type: string
+                  enum: [save, clear, delete]
+                id:
+                  type: string
+                task:
+                  type: string
+                category:
+                  type: string
+                recommendation:
+                  type: object
+  /saved:
+    get:
+      summary: List saved recommendations
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 12
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+        - in: query
+          name: category
+          schema:
+            type: string
+        - in: query
+          name: query
+          schema:
+            type: string
+    post:
+      summary: Save, delete, or clear saved items
+  /reviews:
+    get:
+      summary: List reviews
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 12
+        - in: query
+          name: offset
+          schema:
+            type: integer
+            default: 0
+        - in: query
+          name: query
+          schema:
+            type: string
+        - in: query
+          name: minScore
+          schema:
+            type: integer
+            default: 0
+    post:
+      summary: Save, delete, or clear reviews
