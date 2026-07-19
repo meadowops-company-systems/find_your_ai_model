@@ -21,6 +21,9 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Import our modules
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from recommendation_engine import get_recommendation_engine
 from utils.validators import validate_task_input
 from utils.formatters import format_error_response, format_success_response
